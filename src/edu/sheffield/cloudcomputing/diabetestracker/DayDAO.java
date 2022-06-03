@@ -28,7 +28,7 @@ public class DayDAO {
 	
 	static {
 		
-		url = "jdbc:postgres://vefwemgkfrlekv:80fb0c1818d3ed6620086e1173a5d763e80b96d4be9d5dc6403a47976ea9b580@ec2-52-18-116-67.eu-west-1.compute.amazonaws.com:5432/d5n22bs5ngdp5e";
+		url = "jdbc:postgres://ec2-52-18-116-67.eu-west-1.compute.amazonaws.com:5432/d5n22bs5ngdp5e";
 		props = new Properties();
 		
 		try {
