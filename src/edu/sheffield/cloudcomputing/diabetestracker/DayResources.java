@@ -21,17 +21,29 @@ import javax.ws.rs.core.Response;
 @Path("/days")
 public class DayResources {
 	
-	//DAO class creates and returns its single instance
-	//This instance is then used by all APIs below to call the appropriate DAO methods
+
 	private DayDAO dao = DayDAO.getInstance();
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public String test() {
-		return "{\"test\":true}";
-	}
 	
-	//API to list all products
+	@GET
+	@Path("/")
+	@Produces({MediaType.TEXT_PLAIN})
+	public Response index() {
+	return Response
+	.status(200)
+	.header("Access-Control-Allow-Origin", "*")
+	.header("Access-Control-Allow-Credentials", "true")
+	.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+	.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+	.entity("")
+	.build();
+	}
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public String test() {
+//		return "{\"test\":true}";
+//	}
+	
 	@GET
 	@Path("list/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
