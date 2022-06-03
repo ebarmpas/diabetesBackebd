@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="ISO-8859-1">
+	<title>Example client</title>
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+		
+	</head>
+	<body>
+		<p>The UI and backend don't try to check for invalid data, if the data is wrong, it will go through</p>
+		<textarea id="name" placeholder="name"></textarea>
+		<br></br>
+		<textarea id="yearLow" placeholder="Lower bound year"></textarea>
+		<textarea id="monthLow" placeholder="Lower bound month"></textarea>
+		<textarea id="dayLow" placeholder="Lower bound day"></textarea>
+		<br></br>
+		<textarea id="yearHigh" placeholder="Higher bound year"></textarea>
+		<textarea id="monthHigh" placeholder="Higher bound month"></textarea>
+		<textarea id="dayHigh" placeholder="Higher bound day"></textarea>
+		<br></br>
+		<button id="action" onclick = "getDataFromREST('list')" >get days</button>
+		<button id="action" onclick = "getDataFromREST('bloodGlucose')" >get average blood glucose</button>
+		<button id="action" onclick = "getDataFromREST('carbIntake')" >get average carb intake</button>
+		<br></br>
+		<textarea id="results" placeholder="results"></textarea>
+
+		<script>
+
+			function buildLowBound(){
+				const lowYear = document.getElementById("yearLow").value;
+				const lowMonth = document.getElementById("monthLow").value;
+				const lowDay = document.getElementById("dayLow").value;
+				
+				if(lowDay == "" || lowMonth == "" || lowYear == "")
+					return null;
+				else
+					return lowYear + "-" + lowMonth + "-" + lowDay;
+			}
+
+			function buildHighBound(){
+				
+				const highYear = document.getElementById("yearHigh").value;
+				const highMonth = document.getElementById("monthHigh").value;
+				const highDay = document.getElementById("dayHigh").value;
+
+				if(highDay == "" || highMonth == "" || highYear == "")
+					return null;
+				else
+					return highYear + "-" + highMonth + "-" + highDay;
+			}
+			function getDataFromREST(cause) {
+	
+				const lb = buildLowBound();
+				const hb = buildHighBound();
+				let url = cause + "/" + document.getElementById("name").value;
+				let finalUrl;
+				
+				if(lb != null || hb != null)
+					 finalUrl = url + "/" + lb + "/" + hb;
+				else
+					finalUrl = url;
+				jQuery.ajax({url: "http://localhost:8081/DiabetesTracker/rest/days/" + finalUrl,
+				type: "GET",
+				//contentType: 'application/json; charset=utf-8',
+				dataType: "json",
+				success: 
+					function (resultData) { 
+						const res = JSON.stringify(resultData);
+						document.getElementById("results").value = res;
+					},
+				error : 
+					function(jqXHR, textStatus, errorThrown) {
+	
+					},
+					timeout: 120000,
+				});
+			}
+			</script>
+	</body>
+	
+</html>
