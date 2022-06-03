@@ -28,7 +28,7 @@ public class DayResources {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String test() {
-		return "test";
+		return "{\"test\":true}";
 	}
 	
 	//API to list all products
