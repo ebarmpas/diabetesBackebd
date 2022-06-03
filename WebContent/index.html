@@ -60,7 +60,7 @@
 					 finalUrl = url + "/" + lb + "/" + hb;
 				else
 					finalUrl = url;
-				jQuery.ajax({url: "http://localhost:8081/DiabetesTracker/rest/days/" + finalUrl,
+				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/" + finalUrl,
 				type: "GET",
 				//contentType: 'application/json; charset=utf-8',
 				dataType: "json",
