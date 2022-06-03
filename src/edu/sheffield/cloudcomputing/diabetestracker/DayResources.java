@@ -25,6 +25,12 @@ public class DayResources {
 	//This instance is then used by all APIs below to call the appropriate DAO methods
 	private DayDAO dao = DayDAO.getInstance();
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String test() {
+		return "test";
+	}
+	
 	//API to list all products
 	@GET
 	@Path("list/{name}")
