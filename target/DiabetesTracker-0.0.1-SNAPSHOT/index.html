@@ -2,14 +2,15 @@
 <html>
 	<head>
 	<meta charset="ISO-8859-1">
-	<title>Example client</title>
+	<title>Diabetes client</title>
 
 		<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
 		
 	</head>
 	<body>
 		<p>The UI and backend don't try to check for invalid data, if the data is wrong, it will go through</p>
-		<textarea id="name" placeholder="name"></textarea>
+		<h2>Get data</h2>
+		<textarea id="queryName" placeholder="Name"></textarea>
 		<br></br>
 		<textarea id="yearLow" placeholder="Lower bound year"></textarea>
 		<textarea id="monthLow" placeholder="Lower bound month"></textarea>
@@ -23,37 +24,41 @@
 		<button id="action" onclick = "getDataFromREST('bloodGlucose')" >get average blood glucose</button>
 		<button id="action" onclick = "getDataFromREST('carbIntake')" >get average carb intake</button>
 		<br></br>
-		<textarea id="results" placeholder="results"></textarea>
+		<textarea id="results" placeholder="results" rows="25" cols="150"></textarea>
+
+		<!-- <h2>Add data</h2>
+
+		<textarea id="AddName" placeholder="Name"></textarea>
+		<br></br>
+		<textarea id="yearCurrent" placeholder="Current year"></textarea>
+		<textarea id="monthCurrent" placeholder="Current month"></textarea>
+		<textarea id="dayCurrent" placeholder="Current day"></textarea>
+		<br></br>
+		<textarea id="bloodGlucose" placeholder="Blood glucose"></textarea>
+		<textarea id="carbIntake" placeholder="Carb intake"></textarea>
+		<textarea id="medicationDose" placeholder="medicationose"></textarea>
+		<button onclick="addDay()">Add day</button>
+		<br></br>
+		<textarea id="status" placeholder="status" rows="5" cols="5"></textarea> -->
 
 		<script>
+			function buildDate(specifier){
+				const year = document.getElementById("year" + specifier).value;
+				const month = document.getElementById("month" + specifier).value;
+				const day = document.getElementById("day" + specifier).value;
 
-			function buildLowBound(){
-				const lowYear = document.getElementById("yearLow").value;
-				const lowMonth = document.getElementById("monthLow").value;
-				const lowDay = document.getElementById("dayLow").value;
-				
-				if(lowDay == "" || lowMonth == "" || lowYear == "")
+				if(day == "" || month == "" || year == "")
 					return null;
 				else
-					return lowYear + "-" + lowMonth + "-" + lowDay;
+					return year + "-" + month + "-" + day;
 			}
-
-			function buildHighBound(){
-				
-				const highYear = document.getElementById("yearHigh").value;
-				const highMonth = document.getElementById("monthHigh").value;
-				const highDay = document.getElementById("dayHigh").value;
-
-				if(highDay == "" || highMonth == "" || highYear == "")
-					return null;
-				else
-					return highYear + "-" + highMonth + "-" + highDay;
-			}
+			
 			function getDataFromREST(cause) {
 	
-				const lb = buildLowBound();
-				const hb = buildHighBound();
-				let url = cause + "/" + document.getElementById("name").value;
+				const lb = buildDate("Low");
+				const hb = buildDate("High");
+
+				let url = cause + "/" + document.getElementById("queryName").value;
 				let finalUrl;
 				
 				if(lb != null || hb != null)
@@ -76,6 +81,31 @@
 					timeout: 120000,
 				});
 			}
+
+			// function addDay(){
+			// 	const date = buildDate("Current");
+			// 	const name = document.getElementById("addName");
+			// 	const glucose = document.getElementById("bloodGlucose");
+			// 	const carbs = document.getElementById("carbIntake");
+			// 	const meds = document.getElementById("medicationDose");
+
+			// 	jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/add" + name + "/" + glucose + "/" + carbs + "/" + meds + "/" + date,
+			// 	type: "POST",
+			// 	//contentType: 'application/json; charset=utf-8',
+			// 	dataType: "json",
+			// 	success: 
+			// 		function (resultData) { 
+			// 			const res = JSON.stringify(resultData);
+			// 			document.getElementById("results").value = "Success";
+			// 		},
+			// 	error : 
+			// 		function(jqXHR, textStatus, errorThrown) {
+	
+			// 		},
+			// 		timeout: 120000,
+			// 	});
+			// }
+
 			</script>
 	</body>
 	

@@ -24,11 +24,10 @@ public class DayResources {
 
 	private DayDAO dao = DayDAO.getInstance();
 	
-	
 	@GET
 	@Path("/")
 	@Produces({MediaType.TEXT_PLAIN})
-	public Response index() {
+	public Response indexGet() {
 	return Response
 	.status(200)
 	.header("Access-Control-Allow-Origin", "*")
@@ -38,11 +37,6 @@ public class DayResources {
 	.entity("")
 	.build();
 	}
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public String test() {
-//		return "{\"test\":true}";
-//	}
 	
 	@GET
 	@Path("list/{name}")
@@ -85,40 +79,31 @@ public class DayResources {
 	public double averageCarbIntakeBetween(@PathParam("name") String name, @PathParam("lowBoundry") String low, @PathParam("highBoundry") String high) {
 		return dao.averageCarbIntakeBetween(name, low, high);
 	}
-//	@GET
-//	@Path("/day/{patient}/{day}")
-//	public Day
+
 //	@POST
+//	@Path("add/{name}/{bloodGlucose}/{carbIntake}/{medicationDose}/{trackedDay}")
 //	@Consumes(MediaType.APPLICATION_JSON)
-//	public Response add(String patient, Day day) throws URISyntaxException {
-//		int newDayId = dao.addDay(patient, day);
-//		URI uri = new URI("/days/ + newDayId);
+//	public Response addDay(@PathParam("name") String patient, @PathParam("bloodGlucose") double bloodGlucose, @PathParam("carbIntake") double carbIntake,
+//			@PathParam("medicationDose") double medicationDose, @PathParam("trackedDay") String date) throws URISyntaxException {
+//		
+//		Day d = new Day(0, date, bloodGlucose, carbIntake, medicationDose);
+//		URI uri;
+//		int newDayId = dao.addDay(patient, d);
+//		if(newDayId != -1)
+//			uri = new URI("/days/list/" + patient + "/" + date + "/" + date);
+//		else
+//			uri = new URI("/days/");
 //	
-//		return Response.created(uri).build();
+//		return Response.created(uri).status(200)
+//				.header("Access-Control-Allow-Origin", "*")
+//				.header("Access-Control-Allow-Credentials", "true")
+//				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+//				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+//				.entity("")
+//				.build();
 //	}
-//	
-//	//API to get  product
-//	@GET
-//	@Path("{id}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response get(@PathParam("id") int id) {
-//		Day day = null;
-//		try {
-//			day = dao.get(id);
-//		} catch (SQLException | ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		if (day != null) {
-//
-//			return Response
-//					.ok(day, MediaType.APPLICATION_JSON)
-//					.build();
-//		} else {
-//			//status(Response.Status.NOT_FOUND) returns a new ResponseBuilder object with the supplied status
-//			return Response.status(Response.Status.NOT_FOUND).build();
-//		}
-//	}
+	
+
 
 	
 }
