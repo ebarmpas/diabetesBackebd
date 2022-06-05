@@ -27,7 +27,7 @@
 		<textarea id="results" placeholder="results" rows="25" cols="150"></textarea>
 		<h2>Add data</h2>
 
-		<textarea id="AddName" placeholder="Name"></textarea>
+		<textarea id="addName" placeholder="Name"></textarea>
 		<br></br>
 		<textarea id="yearCurrent" placeholder="Current year"></textarea>
 		<textarea id="monthCurrent" placeholder="Current month"></textarea>
@@ -145,12 +145,13 @@
 
 			function addDay(){
 				const date = buildDate("Current");
-				const patient = document.getElementById("addName");
-				const glucose = document.getElementById("bloodGlucose");
-				const carbs = document.getElementById("carbIntake");
-				const meds = document.getElementById("medicationDose");
-
-				const postData = JSON.parse('{"name":"' + patient + '","bloodGlucose": ' + glucose + ',"carbIntake":' + carbs + ',"medicationDose":' + meds +',"trackedDay":"' + date +'"}');
+				const patient = document.getElementById("addName").value;
+				const glucose = document.getElementById("bloodGlucose").value;
+				const carbs = document.getElementById("carbIntake").value;
+				const meds = document.getElementById("medicationDose").value;
+				const stringData = `{"name":"${patient}","bloodGlucose":${glucose},"carbIntake":${carbs},"medicationDose":${meds},"trackedDay":"${date}"}`;
+				console.log(stringData);
+				const postData = JSON.parse(stringData);
 				console.log(postData);
 
 				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/add",
