@@ -145,14 +145,14 @@
 
 			function addDay(){
 				const date = buildDate("Current");
-				const name = document.getElementById("addName");
+				const patient = document.getElementById("addName");
 				const glucose = document.getElementById("bloodGlucose");
 				const carbs = document.getElementById("carbIntake");
 				const meds = document.getElementById("medicationDose");
 
 				const postData = JSON.parse('{"name":"' + patient + '","bloodGlucose": ' + glucose + ',"carbIntake":' + carbs + ',"medicationDose":' + meds +',"trackedDay":"' + date +'"}');
 				console.log(postData);
-				
+
 				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/add",
 				type: "POST",
 				contentType: 'application/json; charset=utf-8',
