@@ -242,6 +242,7 @@ public class DayDAO {
 		return answer;
 	}
 	
+	
 	public int addDay(String Patient, Day day) {
 		
 		int answer = -1;
@@ -269,5 +270,6 @@ public class DayDAO {
 		
 		return answer;
 	}
+	
 }
 

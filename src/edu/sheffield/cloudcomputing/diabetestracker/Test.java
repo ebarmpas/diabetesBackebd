@@ -1,17 +1,18 @@
 package edu.sheffield.cloudcomputing.diabetestracker;
 
+import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
+		//This class does nothing but it can be used to perform CRUD operations on the database that can't be done on the frontend due to the CORS issue/
 		DayDAO dao = DayDAO.getInstance();
-		
-		
-//		Day d = new Day(1, "2021-01-16", 5, 5, 2);
-//		System.out.println(dao.addDay("Jenny", d));
-//		System.out.println(dao.averageCarbIntake("George", "2021-01-01", "2021-02-01"));
-		System.out.println(dao.averageBloodGlucoseAll("Jim"));
+
 	}
-	
-	
-	
 }
+//Names of the currently registered patients:
+//George
+//Jim
+//Maria
+//Tiffany
+//Harry
+//Amy
