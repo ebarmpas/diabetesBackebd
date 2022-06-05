@@ -150,8 +150,9 @@
 				const carbs = document.getElementById("carbIntake");
 				const meds = document.getElementById("medicationDose");
 
-				const postData = JSON.parse(`{"name":${name},"bloodGlucose":${glucose},"carbIntake":${carbs},"medicationDose":${meds},"trackedDay":${name}}`);
+				const postData = JSON.parse('{"name":"' + patient + '","bloodGlucose": ' + glucose + ',"carbIntake":' + carbs + ',"medicationDose":' + meds +',"trackedDay":"' + date +'"}');
 				console.log(postData);
+				
 				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/add",
 				type: "POST",
 				contentType: 'application/json; charset=utf-8',
