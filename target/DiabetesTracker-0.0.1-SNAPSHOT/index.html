@@ -25,10 +25,7 @@
 		<button id="action" onclick = "getDataFromREST('carbIntake')" >get average carb intake</button>
 		<br></br>
 		<textarea id="results" placeholder="results" rows="25" cols="150"></textarea>
-		<canvas id="myChart" width="100" height="100"></canvas>
-
-		
-		<!-- <h2>Add data</h2>
+		<h2>Add data</h2>
 
 		<textarea id="AddName" placeholder="Name"></textarea>
 		<br></br>
@@ -41,8 +38,11 @@
 		<textarea id="medicationDose" placeholder="medicationose"></textarea>
 		<button onclick="addDay()">Add day</button>
 		<br></br>
-		<textarea id="status" placeholder="status" rows="5" cols="5"></textarea> -->
+		<textarea id="status" placeholder="status" rows="5" cols="5"></textarea> 
 
+		
+		<canvas id="myChart" width="25" height="25"></canvas>
+		
 		<script>
 			let data;
 			let chartData = [];
@@ -143,29 +143,32 @@
 				});
 			}
 
-			// function addDay(){
-			// 	const date = buildDate("Current");
-			// 	const name = document.getElementById("addName");
-			// 	const glucose = document.getElementById("bloodGlucose");
-			// 	const carbs = document.getElementById("carbIntake");
-			// 	const meds = document.getElementById("medicationDose");
+			function addDay(){
+				const date = buildDate("Current");
+				const name = document.getElementById("addName");
+				const glucose = document.getElementById("bloodGlucose");
+				const carbs = document.getElementById("carbIntake");
+				const meds = document.getElementById("medicationDose");
 
-			// 	jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/add" + name + "/" + glucose + "/" + carbs + "/" + meds + "/" + date,
-			// 	type: "POST",
-			// 	//contentType: 'application/json; charset=utf-8',
-			// 	dataType: "json",
-			// 	success: 
-			// 		function (resultData) { 
-			// 			const res = JSON.stringify(resultData);
-			// 			document.getElementById("results").value = "Success";
-			// 		},
-			// 	error : 
-			// 		function(jqXHR, textStatus, errorThrown) {
+				const postData = `"{name":${name}, "bloodGlucose":${glucose},"carbIntake":${carbs},"medicationDose":${meds},"trackedDay":${name}}`;
+
+				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/add",
+				type: "POST",
+				contentType: 'application/json; charset=utf-8',
+				dataType: "json",
+				data: postData,
+				success: 
+					function (resultData) { 
+						const res = JSON.stringify(resultData);
+						document.getElementById("results").value = "Success";
+					},
+				error : 
+					function(jqXHR, textStatus, errorThrown) {
 	
-			// 		},
-			// 		timeout: 120000,
-			// 	});
-			// }
+					},
+					timeout: 120000,
+				});
+			}
 
 			
 			</script>

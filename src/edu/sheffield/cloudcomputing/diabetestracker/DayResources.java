@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -80,28 +81,28 @@ public class DayResources {
 		return dao.averageCarbIntakeBetween(name, low, high);
 	}
 
-//	@POST
-//	@Path("add/{name}/{bloodGlucose}/{carbIntake}/{medicationDose}/{trackedDay}")
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public Response addDay(@PathParam("name") String patient, @PathParam("bloodGlucose") double bloodGlucose, @PathParam("carbIntake") double carbIntake,
-//			@PathParam("medicationDose") double medicationDose, @PathParam("trackedDay") String date) throws URISyntaxException {
-//		
-//		Day d = new Day(0, date, bloodGlucose, carbIntake, medicationDose);
-//		URI uri;
-//		int newDayId = dao.addDay(patient, d);
-//		if(newDayId != -1)
-//			uri = new URI("/days/list/" + patient + "/" + date + "/" + date);
-//		else
-//			uri = new URI("/days/");
-//	
-//		return Response.created(uri).status(200)
-//				.header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Credentials", "true")
-//				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-//				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-//				.entity("")
-//				.build();
-//	}
+	@POST
+	@Path("add")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addDay(@FormParam("name") String patient, @FormParam("bloodGlucose") double bloodGlucose, @FormParam("carbIntake") double carbIntake,
+			@FormParam("medicationDose") double medicationDose, @FormParam("trackedDay") String date) throws URISyntaxException {
+		
+		Day d = new Day(0, date, bloodGlucose, carbIntake, medicationDose);
+		URI uri;
+		int newDayId = dao.addDay(patient, d);
+		if(newDayId != -1)
+			uri = new URI("/days/list/" + patient + "/" + date + "/" + date);
+		else
+			uri = new URI("/days/");
+	
+		return Response.created(uri).status(200)
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+				.entity("")
+				.build();
+	}
 	
 
 
