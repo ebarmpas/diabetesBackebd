@@ -23,7 +23,7 @@ public class DayDAO {
 	private static DayDAO instance;
 	
 	private static Connection database;
-	private static String url;
+//	private static String url;
 	
 	private DayDAO() {
 		
@@ -35,7 +35,7 @@ public class DayDAO {
 	public static DayDAO getInstance() {
 		if (instance == null) {
 			
-			url = "jdbc:postgresql://ec2-34-247-172-149.eu-west-1.compute.amazonaws.com:5432/dbvec40me4ad2p?password=0b5b90765942ee6303b2229fb9895ab6ebd76e329de4e961b69394c57008483e&sslmode=require&user=phvtznfzwxwhnr";
+//			url = "jdbc:postgresql://ec2-34-247-172-149.eu-west-1.compute.amazonaws.com:5432/dbvec40me4ad2p?password=0b5b90765942ee6303b2229fb9895ab6ebd76e329de4e961b69394c57008483e&sslmode=require&user=phvtznfzwxwhnr";
 			
 			try {
 				Class.forName("org.postgresql.Driver");
@@ -44,7 +44,7 @@ public class DayDAO {
 			}
 			
 			try {
-				database = DriverManager.getConnection(url);
+				database = DriverManager.getConnection(System.getenv("JDBC_DATABASE_URL"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
