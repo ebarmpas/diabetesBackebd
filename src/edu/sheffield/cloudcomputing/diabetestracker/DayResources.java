@@ -2,8 +2,6 @@ package edu.sheffield.cloudcomputing.diabetestracker;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
