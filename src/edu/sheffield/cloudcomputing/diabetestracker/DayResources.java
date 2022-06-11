@@ -77,7 +77,7 @@ public class DayResources {
 		
 		Day d = new Day(fields[9], Double.valueOf(fields[7]),Double.valueOf(fields[5]), Double.valueOf(fields[3]));
 		URI uri;
-		int newDayId = 3;//dao.addDay(patient, d);
+		int newDayId = dao.addDay(fields[1], d);
 		if(newDayId != -1)
 			uri = new URI("/days/list/" + fields[1] + "/" + fields[7] + "/" + fields[7]);
 		else
