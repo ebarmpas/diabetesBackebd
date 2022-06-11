@@ -2,7 +2,6 @@ package edu.sheffield.cloudcomputing.diabetestracker;
 
 
 import java.io.IOException;
-import java.util.logging.Logger;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
@@ -18,6 +17,9 @@ public class CORSResponseFilter implements ContainerResponseFilter {
 
         responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
         responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
-        responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+        responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD");
+        responseContext.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
+        responseContext.getHeaders().add("Access-Control-Max-Age", "1209600");
+        responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
     }
 }
