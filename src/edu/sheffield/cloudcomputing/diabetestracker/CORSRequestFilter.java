@@ -14,7 +14,7 @@ public class CORSRequestFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestCtx) throws IOException {
  
-        if (requestCtx.getRequest().getMethod().equals( "OPTIONS")) {
+        if (requestCtx.getRequest().getMethod().equals("OPTIONS")) {
         	requestCtx.abortWith(Response.status(Response.Status.OK).build());
         }
     }

@@ -38,6 +38,7 @@
 		<textarea id="carbIntake" placeholder="Carb intake"></textarea>
 		<textarea id="medicationDose" placeholder="medicationose"></textarea>
 		<button onclick="addDay()">Add day</button>
+		<button onclick="addPatient()">Add patient</button>
 		<br></br>
 		<textarea id="status" placeholder="status" rows="5" cols="5"></textarea> 
 
@@ -123,6 +124,7 @@
 							myChart.data.labels = [];
 							myChart.data.datasets[0].data = [];
 							myChart.data.datasets[1].data = [];
+
 							for(let i = 0; i < data.length; i++){
 								myChart.data.labels.push(data[i].date);
 								myChart.data.datasets[0].data.push(data[i].bloodGlucose);
@@ -163,7 +165,7 @@
 				success: 
 					function (resultData) { 
 						const res = JSON.stringify(resultData);
-						document.getElementById("results").value = "Success";
+						document.getElementById("status").value = res;
 					},
 				error : 
 					function(jqXHR, textStatus, errorThrown) {
@@ -173,6 +175,26 @@
 				});
 			}
 
+			function addPatient(){
+				const patient = document.getElementById("addName").value;
+				const postData = JSON.parse(`"name":"${patient}"`);
+				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/patient",
+				type: "POST",
+				contentType: 'application/json; charset=utf-8',
+				dataType: "json",
+				data: postData,
+				success: 
+					function (resultData) { 
+						const res = JSON.stringify(resultData);
+						document.getElementById("status").value = res;
+					},
+				error : 
+					function(jqXHR, textStatus, errorThrown) {
+	
+					},
+					timeout: 120000,
+				});
+			}
 			
 			</script>
 	</body>

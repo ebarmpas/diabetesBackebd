@@ -6,9 +6,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -22,7 +20,7 @@ import javax.ws.rs.core.Response;
 public class DayResources {
 	
 
-	private DayDAO dao = DayDAO.getInstance();
+	private DiabetesDAO dao = DiabetesDAO.getInstance();
 	
 	@GET
 	@Path("list/{name}")
@@ -84,6 +82,22 @@ public class DayResources {
 		return Response.created(uri).status(200).build();
 	}
 	
+	@POST
+	@Path("patient")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addPatient(String x) {
+		URI uri;
+		
+		String[] fields = x.split("=");
+
+		try {
+			uri = new URI("/days/list/" + dao.addPatient(fields[1]));
+		} catch (URISyntaxException e) {
+			uri = null;
+			e.printStackTrace();
+		}
+		return Response.created(uri).status(200).build();
+	}
 
 
 	
