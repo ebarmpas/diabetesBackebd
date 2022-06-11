@@ -282,7 +282,6 @@ public class DiabetesDAO {
 			answer = res.getInt(1);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -293,7 +292,7 @@ public class DiabetesDAO {
 		
 		String answer = null;
 		
-		if(getPatientId(patient) == 0)
+		if(getPatientId(patient) != 0)
 			return answer;
 		try {	
 			PreparedStatement statement = database.prepareStatement("INSERT INTO Patient (name)"
@@ -308,7 +307,6 @@ public class DiabetesDAO {
 			answer = res.getString(1);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
