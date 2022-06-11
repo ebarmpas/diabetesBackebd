@@ -177,7 +177,7 @@
 
 			function addPatient(){
 				const patient = document.getElementById("addName").value;
-				const postData = JSON.parse(`"name":"${patient}"`);
+				const postData = JSON.parse(`{"name":"${patient}"}`);
 				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/patient",
 				type: "POST",
 				contentType: 'application/json; charset=utf-8',

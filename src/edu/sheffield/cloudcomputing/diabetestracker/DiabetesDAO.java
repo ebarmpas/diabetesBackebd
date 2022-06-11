@@ -275,7 +275,9 @@ public class DiabetesDAO {
 		
 		String answer = null;
 		
-		try {
+		if(getPatientId(patient) == 0)
+			return answer;
+		try {	
 			PreparedStatement statement = database.prepareStatement("INSERT INTO Patient (name)"
 					+ "VALUES (?)"
 					+ "RETURNING name;");
