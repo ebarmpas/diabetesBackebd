@@ -24,6 +24,7 @@
 		<button id="action" onclick = "getDataFromREST('list')" >get days</button>
 		<button id="action" onclick = "getDataFromREST('bloodGlucose')" >get average blood glucose</button>
 		<button id="action" onclick = "getDataFromREST('carbIntake')" >get average carb intake</button>
+		<button id="action" onclick = "getDataFromREST('patients')" >get all patients</button>
 		<br></br>
 		<textarea id="results" placeholder="results" rows="25" cols="150"></textarea>
 		<h2>Add data</h2>
@@ -111,6 +112,8 @@
 				
 				if(lb != null || hb != null)
 					 finalUrl = url + "/" + lb + "/" + hb;
+				else if(cause == "patients")
+					finalUrl = "list/patients";
 				else
 					finalUrl = url;
 				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/" + finalUrl,
@@ -177,7 +180,7 @@
 
 			function addPatient(){
 				const patient = document.getElementById("addName").value;
-				const postData = JSON.parse(`{"name":"${patient}"}`);
+				const postData = JSON.parse(`{"name":"${patient}"}	`);
 				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/patient",
 				type: "POST",
 				contentType: 'application/json; charset=utf-8',

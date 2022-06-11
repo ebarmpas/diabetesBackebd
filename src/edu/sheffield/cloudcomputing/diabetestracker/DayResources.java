@@ -37,6 +37,15 @@ public class DayResources {
 	}
 	
 	@GET
+	@Path("list/patients")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<String> listPatients(){
+		return dao.listPatients();
+	}
+		
+	
+	
+	@GET
 	@Path("bloodGlucose/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public double averageBloodGlucoseAll(@PathParam("name") String name) {

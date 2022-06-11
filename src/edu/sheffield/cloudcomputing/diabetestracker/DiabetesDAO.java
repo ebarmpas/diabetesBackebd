@@ -122,7 +122,25 @@ public class DiabetesDAO {
 		
 		return answer;
 	}
-	
+	public List<String> listPatients(){
+		ArrayList<String> answer = null;
+		
+		try {
+		PreparedStatement statement= database.prepareStatement(
+				"SELECT name FROM Patient;");
+			statement.execute();
+			ResultSet res = statement.getResultSet();
+			
+			answer = new ArrayList<String>();
+			
+			while(res.next())
+				answer.add(res.getString(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return answer;
+	}
 	public List<Day> listBetween(String patient, String d1, String d2){
 		ArrayList<Day> answer = null;
 		
