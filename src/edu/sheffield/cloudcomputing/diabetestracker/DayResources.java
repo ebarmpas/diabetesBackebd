@@ -66,12 +66,18 @@ public class DayResources {
 	public double averageCarbIntakeBetween(@PathParam("name") String name, @PathParam("lowBoundry") String low, @PathParam("highBoundry") String high) {
 		return dao.averageCarbIntakeBetween(name, low, high);
 	}
-
+//@Para("name") String patient, @FormParam("bloodGlucose") double bloodGlucose, @FormParam("carbIntake") double carbIntake,
+//	@FormParam("medicationDose") double medicationDose, @FormParam("trackedDay") String date
 	@POST
 	@Path("add")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addDay(@FormParam("name") String patient, @FormParam("bloodGlucose") double bloodGlucose, @FormParam("carbIntake") double carbIntake,
-			@FormParam("medicationDose") double medicationDose, @FormParam("trackedDay") String date) throws URISyntaxException {
+	public Response addDay() throws URISyntaxException {
+		
+		String date = "2021-04-02";
+		double bloodGlucose = 30;
+		double carbIntake = 30;
+		double medicationDose = 30;
+		String patient = "George";
 		
 		Day d = new Day(0, date, bloodGlucose, carbIntake, medicationDose);
 		URI uri;
