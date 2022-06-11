@@ -73,7 +73,7 @@ public class DayDAO {
 			statement.execute();
 			ResultSet res = statement.getResultSet();
 			if(res.next())
-				answer = new Day(res.getInt(ID),res.getString(DATE),
+				answer = new Day(res.getString(DATE),
 						res.getDouble(BLOOD_GLUCOSE),res.getDouble(CARB_INTAKE),res.getDouble(MEDICATION_DOSE));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -115,7 +115,7 @@ public class DayDAO {
 			answer = new ArrayList<Day>();
 			
 			while(res.next())
-				answer.add(new Day(res.getInt(ID),res.getString(DATE),res.getDouble(BLOOD_GLUCOSE),
+				answer.add(new Day(res.getString(DATE),res.getDouble(BLOOD_GLUCOSE),
 						res.getDouble(CARB_INTAKE),res.getDouble(MEDICATION_DOSE)));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,7 +143,7 @@ public class DayDAO {
 			
 			answer = new ArrayList<Day>();
 			while(res.next()) 
-				answer.add(new Day(res.getInt(ID),res.getString(DATE),res.getDouble(BLOOD_GLUCOSE),
+				answer.add(new Day(res.getString(DATE),res.getDouble(BLOOD_GLUCOSE),
 						res.getDouble(CARB_INTAKE),res.getDouble(MEDICATION_DOSE)));
 		} catch (SQLException e) {
 			

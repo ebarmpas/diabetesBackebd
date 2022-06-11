@@ -10,6 +10,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -66,24 +67,19 @@ public class DayResources {
 	public double averageCarbIntakeBetween(@PathParam("name") String name, @PathParam("lowBoundry") String low, @PathParam("highBoundry") String high) {
 		return dao.averageCarbIntakeBetween(name, low, high);
 	}
-//@Para("name") String patient, @FormParam("bloodGlucose") double bloodGlucose, @FormParam("carbIntake") double carbIntake,
-//	@FormParam("medicationDose") double medicationDose, @FormParam("trackedDay") String date
+
 	@POST
 	@Path("add")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addDay() throws URISyntaxException {
+	public Response addDay(String x) throws URISyntaxException {
 		
-		String date = "2021-04-02";
-		double bloodGlucose = 30;
-		double carbIntake = 30;
-		double medicationDose = 30;
-		String patient = "George";
+		String[] fields = x.split("[&=]");
 		
-		Day d = new Day(0, date, bloodGlucose, carbIntake, medicationDose);
+		Day d = new Day(fields[9], Double.valueOf(fields[7]),Double.valueOf(fields[5]), Double.valueOf(fields[3]));
 		URI uri;
-		int newDayId = dao.addDay(patient, d);
+		int newDayId = 3;//dao.addDay(patient, d);
 		if(newDayId != -1)
-			uri = new URI("/days/list/" + patient + "/" + date + "/" + date);
+			uri = new URI("/days/list/" + fields[1] + "/" + fields[7] + "/" + fields[7]);
 		else
 			uri = new URI("/days/");
 	
