@@ -312,25 +312,25 @@ public class DiabetesDAO {
 		
 	}
 	
-	public boolean deleteDay(String patient, String date) {
-		
-		boolean answer = false;
-		try {
-			PreparedStatement statement = database.prepareStatement("DELETE FROM Day"
-					+ "WHERE tracked_day = ?"
-					+ "AND fk_patient = ?;");
-			
-			statement.setDate(1, Date.valueOf(date));
-			statement.setInt(2, getPatientId(patient));
-			
-			statement.execute();
-			answer = true;
-		} catch (SQLException e) {
-			answer = false;
-			e.printStackTrace();
-		}
-		return answer;
-	}
+//	public boolean deleteDay(String patient, String date) {
+//		
+//		boolean answer = false;
+//		try {
+//			PreparedStatement statement = database.prepareStatement("DELETE FROM Day"
+//					+ "WHERE tracked_day = ?"
+//					+ "AND fk_patient = ?;");
+//			
+//			statement.setDate(1, Date.valueOf(date));
+//			statement.setInt(2, getPatientId(patient));
+//			
+//			statement.execute();
+//			answer = true;
+//		} catch (SQLException e) {
+//			answer = false;
+//			e.printStackTrace();
+//		}
+//		return answer;
+//	}
 	
 }
 

@@ -39,7 +39,7 @@
 		<textarea id="medicationDose" placeholder="medicationose"></textarea>
 		<button onclick="addDay()">Add day</button>
 		<button onclick="addPatient()">Add patient</button>
-		<button onclick="deleteDay()">Delete day</button>
+		<!-- <button onclick="deleteDay()">Delete day</button> -->
 		<br></br>
 		<textarea id="status" placeholder="status" rows="5" cols="5"></textarea> 
 
@@ -106,11 +106,10 @@
 
 				let url = cause + "/" + document.getElementById("queryName").value;
 				let finalUrl;
-				
-				if(lb != null || hb != null)
-					 finalUrl = url + "/" + lb + "/" + hb;
-				else if(cause == "patients")
+				if(cause == "patients")
 					finalUrl = "list/patients";
+				else if(lb != null || hb != null)
+					 finalUrl = url + "/" + lb + "/" + hb;
 				else
 					finalUrl = url;
 				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/" + finalUrl,
@@ -195,30 +194,30 @@
 					timeout: 120000,
 				});
 			}
-			function deleteDay(){
+			// function deleteDay(){
 
-				const date = buildDate("Current");
-				const name = document.getElementById("addName").value;
+			// 	const date = buildDate("Current");
+			// 	const name = document.getElementById("addName").value;
 			
-				if(date == null || name == null)
-					return;
+			// 	if(date == null || name == null)
+			// 		return;
 
-				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/delete/" + name + "/" + date,
-				type: "DELETE",
-				contentType: 'application/json; charset=utf-8',
-				dataType: "json",
-				success: 
-					function (resultData) { 
-						const res = JSON.stringify(resultData);
-						document.getElementById("status").value = res;
-					},
-				error : 
-					function(jqXHR, textStatus, errorThrown) {
+			// 	jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/delete/" + name + "/" + date,
+			// 	type: "DELETE",
+			// 	contentType: 'application/json; charset=utf-8',
+			// 	dataType: "json",
+			// 	success: 
+			// 		function (resultData) { 
+			// 			const res = JSON.stringify(resultData);
+			// 			document.getElementById("status").value = res;
+			// 		},
+			// 	error : 
+			// 		function(jqXHR, textStatus, errorThrown) {
 	
-					},
-					timeout: 120000,
-				});
-			}
+			// 		},
+			// 		timeout: 120000,
+			// 	});
+			// }
 			</script>
 	</body>
 	

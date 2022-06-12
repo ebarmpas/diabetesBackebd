@@ -4,6 +4,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,7 +18,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
+@DeclareRoles({"ADMIN", "PHYSICIAN"})
 @Path("/days")
 public class DayResources {
 	
@@ -25,6 +28,7 @@ public class DayResources {
 	@GET
 	@Path("list/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@PermitAll
 	public List<Day> listAll(@PathParam("name") String name) {
 		return dao.listAll(name);
 	}
@@ -32,6 +36,7 @@ public class DayResources {
 	@GET
 	@Path("list/{name}/{lowBoundry}/{highBoundry}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@PermitAll
 	public List<Day> listSpecified(@PathParam("name") String name, @PathParam("lowBoundry") String low, @PathParam("highBoundry") String high) {
 		return dao.listBetween(name, low, high);
 	}
@@ -39,15 +44,16 @@ public class DayResources {
 	@GET
 	@Path("list/patients")
 	@Produces(MediaType.APPLICATION_JSON)
+	@PermitAll
 	public List<String> listPatients(){
 		return dao.listPatients();
 	}
 		
 	
-	
 	@GET
 	@Path("bloodGlucose/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@PermitAll
 	public double averageBloodGlucoseAll(@PathParam("name") String name) {
 		return dao.averageBloodGlucoseAll(name);
 	}
@@ -55,6 +61,7 @@ public class DayResources {
 	@GET
 	@Path("bloodGlucose/{name}/{lowBoundry}/{highBoundry}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@PermitAll
 	public double averageBloodGlucoseBetween(@PathParam("name") String name, @PathParam("lowBoundry") String low, @PathParam("highBoundry") String high) {
 		return dao.averageBloodGlucoseBetween(name, low, high);
 	}
@@ -62,6 +69,7 @@ public class DayResources {
 	@GET
 	@Path("carbIntake/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@PermitAll
 	public double averageCarbIntakeAll(@PathParam("name") String name) {
 		return dao.averageCarbIntakeAll(name);
 	}
@@ -69,6 +77,7 @@ public class DayResources {
 	@GET
 	@Path("carbIntake/{name}/{lowBoundry}/{highBoundry}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@PermitAll
 	public double averageCarbIntakeBetween(@PathParam("name") String name, @PathParam("lowBoundry") String low, @PathParam("highBoundry") String high) {
 		return dao.averageCarbIntakeBetween(name, low, high);
 	}
@@ -76,6 +85,7 @@ public class DayResources {
 	@POST
 	@Path("add")
 	@Consumes(MediaType.APPLICATION_JSON)
+	@RolesAllowed("ADMIN")
 	public Response addDay(String x) throws URISyntaxException {
 		
 		String[] fields = x.split("[&=]");
@@ -94,6 +104,7 @@ public class DayResources {
 	@POST
 	@Path("patient")
 	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed("ADMIN")
 	public Response addPatient(String x) {
 		URI uri;
 		
@@ -107,13 +118,14 @@ public class DayResources {
 		}
 		return Response.created(uri).status(200).build();
 	}
-
-	@DELETE
-	@Path("delete/{name}/{date}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public boolean deleteDay(@PathParam("name") String name, @PathParam("date") String date) {
-		return dao.deleteDay(name, date);
-	}
+//
+//	@DELETE
+//	@Path("delete/{name}/{date}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public boolean deleteDay(@PathParam("name") String name, @PathParam("date") String date) {
+//		System.out.println(name + "\t" + date);
+//		return dao.deleteDay(name, date);
+//	}
 
 	
 }
