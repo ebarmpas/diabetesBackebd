@@ -111,11 +111,12 @@ public class DayResources {
 	@DELETE
 	@Path("delete/day")
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean deleteDay(String x) {
-		
+	public String deleteDay(String x) {
+		System.out.println(x + "\n\n\n\n\n\n");
 		String[] fields = x.split("[=&]");	
 		
-		return dao.deleteDay(fields[1], fields[3]);
+		dao.deleteDay(fields[1], fields[3]);
+		return x;
 	}
 
 	

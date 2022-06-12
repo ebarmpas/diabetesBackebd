@@ -39,7 +39,7 @@
 		<textarea id="medicationDose" placeholder="medicationose"></textarea>
 		<button onclick="addDay()">Add day</button>
 		<button onclick="addPatient()">Add patient</button>
-		<button onclick="addPatient()">Delete day</button>
+		<button onclick="deleteDay()">Delete day</button>
 		<br></br>
 		<textarea id="status" placeholder="status" rows="5" cols="5"></textarea> 
 
@@ -199,8 +199,8 @@
 
 				const date = buildDate("Current");
 				const name = document.getElementById("addName");
-				const deleteData = JSON.parse(`{"name":"${name}"","date":"${date}"}`);
-				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/patient",
+				const deleteData = JSON.parse(`{"name":"${name}","date":"${date}"}`);
+				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/delete/day",
 				type: "DELETE",
 				contentType: 'application/json; charset=utf-8',
 				dataType: "json",
