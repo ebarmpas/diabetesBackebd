@@ -33,9 +33,7 @@ public class DiabetesDAO {
 	//a single instance of the class
 	public static DiabetesDAO getInstance() {
 		if (instance == null) {
-			
-//			url = "jdbc:postgresql://ec2-34-247-172-149.eu-west-1.compute.amazonaws.com:5432/dbvec40me4ad2p?password=0b5b90765942ee6303b2229fb9895ab6ebd76e329de4e961b69394c57008483e&sslmode=require&user=phvtznfzwxwhnr";
-			
+						
 			try {
 				Class.forName("org.postgresql.Driver");
 			} catch (ClassNotFoundException e1) {
@@ -312,6 +310,26 @@ public class DiabetesDAO {
 		
 		return answer;
 		
+	}
+	
+	public boolean deleteDay(String patient, String date) {
+		
+		boolean answer = false;
+		try {
+			PreparedStatement statement = database.prepareStatement("DELETE FROM Day"
+					+ "WHERE tracked_day = ?"
+					+ "AND fk_patient = ?;");
+			
+			statement.setDate(1, Date.valueOf(date));
+			statement.setInt(2, getPatientId(patient));
+			
+			statement.execute();
+			answer = true;
+		} catch (SQLException e) {
+			answer = false;
+			e.printStackTrace();
+		}
+		return answer;
 	}
 	
 }

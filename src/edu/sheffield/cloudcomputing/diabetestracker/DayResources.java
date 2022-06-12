@@ -108,6 +108,15 @@ public class DayResources {
 		return Response.created(uri).status(200).build();
 	}
 
+	@DELETE
+	@Path("delete/day")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean deleteDay(String x) {
+		
+		String[] fields = x.split("[=&]");	
+		
+		return dao.deleteDay(fields[1], fields[3]);
+	}
 
 	
 }

@@ -9,7 +9,6 @@
 	</head>
 	<body>
 		<h2>Get data</h2>
-		<p>Names of the currently registered patients: George, Jim, Maria, Tiffany, Harry, Amy</p>
 		</ul>
 		<textarea id="queryName" placeholder="Name"></textarea>
 		<br></br>
@@ -27,8 +26,8 @@
 		<button id="action" onclick = "getDataFromREST('patients')" >get all patients</button>
 		<br></br>
 		<textarea id="results" placeholder="results" rows="25" cols="150"></textarea>
-		<h2>Add data</h2>
-		<p>Unfortunatey does not work due to the CORS issue</p>
+		<h2>Delete/Add data</h2>
+		
 		<textarea id="addName" placeholder="Name"></textarea>
 		<br></br>
 		<textarea id="yearCurrent" placeholder="Chosen year"></textarea>
@@ -40,6 +39,7 @@
 		<textarea id="medicationDose" placeholder="medicationose"></textarea>
 		<button onclick="addDay()">Add day</button>
 		<button onclick="addPatient()">Add patient</button>
+		<button onclick="deleteDay()">Delete day</button>
 		<br></br>
 		<textarea id="status" placeholder="status" rows="5" cols="5"></textarea> 
 
@@ -87,9 +87,6 @@
 					}
 				}
 			});
-
-
-
 
 			function buildDate(specifier){
 				const year = document.getElementById("year" + specifier).value;
@@ -198,7 +195,28 @@
 					timeout: 120000,
 				});
 			}
-			
+			function deleteDay(){
+
+				const date = buildDate("Current");
+				const name = document.getElementById("addName");
+				const deleteData = JSON.parse(`{"name":"${name}"","date":"${date}"}`);
+				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/delete/patient",
+				type: "DELETE",
+				contentType: 'application/json; charset=utf-8',
+				dataType: "json",
+				data: deleteData,
+				success: 
+					function (resultData) { 
+						const res = JSON.stringify(resultData);
+						document.getElementById("status").value = res;
+					},
+				error : 
+					function(jqXHR, textStatus, errorThrown) {
+	
+					},
+					timeout: 120000,
+				});
+			}
 			</script>
 	</body>
 	
