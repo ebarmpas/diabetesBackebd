@@ -200,7 +200,7 @@
 				const date = buildDate("Current");
 				const name = document.getElementById("addName");
 				const deleteData = JSON.parse(`{"name":"${name}","date":"${date}"}`);
-				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/delete/patient",
+				jQuery.ajax({url: "https://diabetesserver.herokuapp.com/rest/days/delete/day",
 				type: "DELETE",
 				contentType: 'application/json; charset=utf-8',
 				dataType: "json",
