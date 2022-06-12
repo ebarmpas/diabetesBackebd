@@ -109,14 +109,10 @@ public class DayResources {
 	}
 
 	@DELETE
-	@Path("delete/day")
+	@Path("delete/{name}/{date}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String deleteDay(String x) {
-		System.out.println(x + "\n\n\n\n\n\n");
-		String[] fields = x.split("[=&]");	
-		
-		dao.deleteDay(fields[1], fields[3]);
-		return x;
+	public boolean deleteDay(@PathParam("name") String name, @PathParam("date") String date) {
+		return dao.deleteDay(name, date);
 	}
 
 	
